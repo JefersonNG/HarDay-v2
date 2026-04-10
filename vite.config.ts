@@ -13,8 +13,8 @@ export default defineConfig({
     svgr(),
   ],
 
-  server: {
+  preview: {
     host: true,
-    allowedHosts: ["harday.jefersonng.me"],
+    allowedHosts: ["harday.jefersonng.me", "jefersonng.me"],
   },
 });
