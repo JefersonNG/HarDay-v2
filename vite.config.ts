@@ -12,4 +12,9 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
+
+  server: {
+    host: true,
+    allowedHosts: ["harday.jefersonng.me"],
+  },
 });
