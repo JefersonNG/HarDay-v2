@@ -1,75 +1,102 @@
-# React + TypeScript + Vite
+# HairDay v2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacao web para gerenciamento de agendamentos de barbearia, com foco em simplicidade, rapidez e experiencia visual moderna.
 
-Currently, two official plugins are available:
+## Visao Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O HairDay v2 permite:
 
-## React Compiler
+- criar agendamentos por data, horario e nome do cliente;
+- visualizar os atendimentos do dia separados por periodos (manha, tarde e noite);
+- remover agendamentos individualmente;
+- persistir os dados no navegador usando localStorage.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Stack Tecnica
 
-Note: This will impact Vite dev & build performances.
+- React 19
+- TypeScript
+- Vite 8
+- Tailwind CSS 4
+- React Hook Form
+- ESLint 9
 
-## Expanding the ESLint configuration
+## Arquitetura do Projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+  assets/            # icones e arquivos estaticos
+  components/        # componentes de UI reutilizaveis
+  core-components/   # blocos principais da regra de negocio (agenda e agendamento)
+  pages/             # composicao de paginas
+  types/             # tipos globais e contratos de dados
+  utils/             # contexto, armazenamento e utilitarios
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Regras de Negocio Implementadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- horarios fixos disponiveis para agendamento;
+- bloqueio visual de horarios ja ocupados na data selecionada;
+- filtragem dos agendamentos por data na visao da agenda;
+- segmentacao da agenda em 3 periodos:
+  - Manha: antes de 12:00
+  - Tarde: de 12:00 ate 17:59
+  - Noite: a partir de 18:00
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Como Executar o Projeto
+
+### 1. Pre-requisitos
+
+- Node.js 20+ (recomendado)
+- npm 10+ (ou gerenciador compativel)
+
+### 2. Instalacao
+
+```bash
+npm install
 ```
+
+### 3. Ambiente de desenvolvimento
+
+```bash
+npm run dev
+```
+
+A aplicacao sera iniciada em ambiente local via Vite.
+
+### 4. Build de producao
+
+```bash
+npm run build
+```
+
+### 5. Preview da build
+
+```bash
+npm run preview
+```
+
+## Scripts Disponiveis
+
+- `npm run dev`: inicia servidor de desenvolvimento
+- `npm run build`: executa TypeScript build e gera bundle de producao
+- `npm run preview`: sobe servidor local para validar a build
+- `npm run lint`: executa verificacao de qualidade com ESLint
+
+## Qualidade e Manutencao
+
+- tipagem estatica com TypeScript;
+- validacao e gerenciamento de formulario com React Hook Form;
+- estado compartilhado via React Context;
+- persistencia local desacoplada da camada de interface.
+
+## Possiveis Evolucoes
+
+- validacoes mais robustas de formulario (ex.: esquema com Zod);
+- testes unitarios e de integracao;
+- sincronizacao com API backend;
+- autenticacao e multiusuario;
+- internacionalizacao (i18n).
+
+## Licenca
+
+Este projeto esta sem licenca definida no repositorio. Caso necessario, adicione um arquivo LICENSE para formalizar o uso.
